@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "370437669649",
+    "project_id": "loja-mochilas",
+    "storage_bucket": "loja-mochilas.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:370437669649:android:8b779572f8850881c082b0",
+        "android_client_info": {
+          "package_name": "com.example.mochilas"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "370437669649-b0sj1psc3feghjqfkm76mu2rve4achul.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAalQZUTNwUNeHxR9Q8VQuoIqX6un3KKJ0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "370437669649-b0sj1psc3feghjqfkm76mu2rve4achul.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

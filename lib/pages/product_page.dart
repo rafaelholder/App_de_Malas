@@ -1,86 +1,61 @@
-import 'package:flutter/material.dart';
-import 'package:mochilas/models/suitcase.dart';
+// ignore_for_file: non_constant_identifier_names
 
-class ProductPage extends StatelessWidget {
-  var mala_luxo = Suitcase(nomeProd: 'Mala de Luxo', valor: 2000);
-  var mala_normal = Suitcase(nomeProd: 'mala normal', valor: 400);
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:mochilas/models/app_routes.dart';
+import 'package:mochilas/suitcases/lux_suitcase.dart';
+import 'package:mochilas/suitcases/normal_suitcase.dart';
+
+class ProductPage extends StatefulWidget {
+  const ProductPage({super.key});
+
+  @override
+  State<ProductPage> createState() => _ProductPageState();
+}
+
+class _ProductPageState extends State<ProductPage> {
+  var auth = FirebaseAuth.instance;
 
   @override
   Widget build(BuildContext context) {
+    // ignore: unused_local_variable
+    Map<dynamic, dynamic>? data =
+        ModalRoute.of(context)?.settings.arguments as Map?;
+    //String? name = data!['name'];
+
     return Scaffold(
       appBar: AppBar(
+        primary: true,
+        leading: Padding(
+          padding: const EdgeInsets.all(8),
+          child: IconButton(
+            icon: const Icon(
+              Icons.logout,
+              size: 28,
+              color: Colors.deepPurpleAccent,
+            ),
+            onPressed: () async {
+              auth.signOut().then(
+                    (value) =>
+                        Navigator.popAndPushNamed(context, AppRoutes.LOGINPAGE),
+                  );
+            },
+          ),
+        ),
         centerTitle: true,
-        foregroundColor: Colors.black54,
-        title: const Text('Escolha sua nova Mala'),
+        foregroundColor: Colors.deepPurpleAccent,
+        title: Text(
+          'Escolha sua mala!',
+          //'Olá, $name?',
+          style: Theme.of(context).textTheme.headline1,
+        ),
       ),
-      backgroundColor: Colors.white38,
+      backgroundColor: Colors.white30,
       body: Column(
         children: [
-          Container(
-            height: 200,
-            width: double.maxFinite,
-            decoration: BoxDecoration(borderRadius: BorderRadius.circular(12)),
-            child: Card(
-              elevation: 12,
-              margin: EdgeInsets.all(16),
-              color: Colors.grey,
-              child: Image.asset('assets/Suitcase.png'),
-            ),
-          ),
-          Row(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(
-                    left: 24, right: 24, bottom: 4, top: 1),
-                child: Container(
-                  color: Colors.black,
-                  width: 250,
-                  child: Text(
-                    '${mala_normal.tags}',
-                    style: Theme.of(context).textTheme.bodyText1,
-                  ),
-                ),
-              ),
-              Text(
-                'R\$ ${mala_normal.valor}',
-                style: Theme.of(context).textTheme.caption,
-              ),
-            ],
-          ),
-          SizedBox(
-            width: 50,
-          ),
-          Container(
-            height: 200,
-            width: double.maxFinite,
-            decoration: BoxDecoration(borderRadius: BorderRadius.circular(12)),
-            child: Card(
-              elevation: 12,
-              margin: EdgeInsets.all(16),
-              color: Colors.grey,
-              child: Image.asset('assets/Luxury_suitcase.png'),
-            ),
-          ),
-          Row(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(
-                    left: 24, right: 20, bottom: 4, top: 1),
-                child: Container(
-                  color: Colors.black,
-                  width: 250,
-                  child: Text(
-                    '${mala_luxo.nomeProd}',
-                    style: Theme.of(context).textTheme.bodyText1,
-                  ),
-                ),
-              ),
-              Text(
-                'R\$${mala_luxo.valor}',
-                style: Theme.of(context).textTheme.caption,
-              ),
-            ],
-          )
+          SuitcaseNormal(),
+          const SizedBox(height: 5),
+          LuxSuitcase(),
         ],
       ),
     );
